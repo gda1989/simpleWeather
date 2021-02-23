@@ -12,9 +12,21 @@ import java.util.concurrent.TimeUnit
 
 object ServiceGenerator {
 
-    private fun getClient() : OkHttpClient{
+    private fun getClient(authorized : Boolean) : OkHttpClient{
 
         val builder = OkHttpClient.Builder()
+
+        if(authorized){
+            builder.addInterceptor {
+                return@addInterceptor it.proceed(
+                    it.request().newBuilder()
+                        .header("Authorization", "Token ${BuildConfig.dadaak}")
+                        .build()
+                )
+            }
+        }
+
+        builder
             .readTimeout(90, TimeUnit.SECONDS)
             .connectTimeout(80, TimeUnit.SECONDS)
             .callTimeout(90, TimeUnit.SECONDS)
@@ -37,7 +49,20 @@ object ServiceGenerator {
             .baseUrl(baseAddress)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(getClient())
+            .client(getClient(false))
+            .build()
+            .create(serviceClass)
+    }
+
+    fun <S> createAuthorizedService(
+        serviceClass: Class<S>,
+        baseAddress: String
+    ): S {
+        return Retrofit.Builder()
+            .baseUrl(baseAddress)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(getClient(true))
             .build()
             .create(serviceClass)
     }

@@ -28,9 +28,9 @@ interface DataComponent {
         fun build(): DataComponent
     }
 
-    fun inject(citiesListPresenter: CitiesListPresenter)
-
     fun inject(mainPresenter: MainPresenter)
+
+    fun inject(citiesListPresenter: CitiesListPresenter)
 
     fun inject(weatherDetailsPresenter: WeatherDetailsPresenter)
 }

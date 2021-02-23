@@ -6,6 +6,7 @@ import com.gda.simpleweather.AppFacade
 import com.gda.simpleweather.SWApp
 import com.gda.simpleweather.interactors.WeatherInteractor
 import com.gda.simpleweather.interactors.items.WeatherViewItem
+import com.gda.simpleweather.network.repos.DadataRepo
 import com.gda.simpleweather.ui.activity.MainPresenter
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -22,6 +23,9 @@ class CitiesListPresenter : MvpPresenter<CitiesListView>() {
 
     @Inject
     lateinit var weatherInteractor: WeatherInteractor
+
+    @Inject
+    lateinit var searchRepo: DadataRepo
 
     init {
         (SWApp.get() as AppFacade).getDataComponent()?.inject(this)
@@ -47,6 +51,17 @@ class CitiesListPresenter : MvpPresenter<CitiesListView>() {
             })
     }
 
+    fun getWeather(city: String) {
+        Completable.fromSingle(
+            weatherInteractor.getWeather(city)
+        )
+            .andThen {
+                setChosen(city)
+                it.onComplete()
+            }
+            .subscribe()
+    }
+
     fun setChosen(chosen: String) {
         Completable.fromCallable {
             val sp = SWApp.get().getSharedPreferences("sp", Context.MODE_PRIVATE)
@@ -61,6 +76,15 @@ class CitiesListPresenter : MvpPresenter<CitiesListView>() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 viewState.showDetailsPage(chosen)
+            }, {
+                viewState.onError(it.message)
+            })
+    }
+
+    fun search(q: String) {
+        searchRepo.search(q)
+            .subscribe({
+                viewState.setSearchResults(it)
             }, {
                 viewState.onError(it.message)
             })

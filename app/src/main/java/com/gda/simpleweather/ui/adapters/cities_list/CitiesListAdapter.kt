@@ -11,9 +11,9 @@ class CitiesListAdapter(private val callback: ICitiesList) :
     RecyclerView.Adapter<CitiesListViewHolder>() {
 
     lateinit var items: List<WeatherViewItem?>
-    private var chosen : String = ""
+    private var chosen: String = ""
 
-    fun updateList(items: List<WeatherViewItem?>, chosen : String) {
+    fun updateList(items: List<WeatherViewItem?>, chosen: String) {
         this.items = items
         this.chosen = chosen
         notifyDataSetChanged()      // todo: diffUtil
@@ -26,7 +26,10 @@ class CitiesListAdapter(private val callback: ICitiesList) :
     }
 
     override fun onBindViewHolder(holder: CitiesListViewHolder, position: Int) {
-        items[position]?.let { holder.bind(it, chosen == it.cityName) }
+        items[position]?.let {
+            holder.bind(it, chosen == it.cityName)
+            holder.showDivider(position > 0)
+        }
     }
 
     override fun getItemCount(): Int {

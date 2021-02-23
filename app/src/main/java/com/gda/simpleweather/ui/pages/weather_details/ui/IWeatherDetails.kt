@@ -4,4 +4,5 @@ interface IWeatherDetails {
 
     fun setProgress(progress: Float)
 
+    fun onBackPressed()
 }

@@ -2,7 +2,7 @@ package com.gda.simpleweather.di
 
 import com.gda.simpleweather.interactors.WeatherInteractor
 import com.gda.simpleweather.db.DbRepo
-import com.gda.simpleweather.network.WeatherRepo
+import com.gda.simpleweather.network.repos.WeatherRepo
 import dagger.Module
 import dagger.Provides
 

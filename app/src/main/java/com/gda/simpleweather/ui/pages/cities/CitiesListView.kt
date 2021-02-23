@@ -16,4 +16,7 @@ interface CitiesListView : BaseMvpView {
     @StateStrategyType(OneExecutionStateStrategy::class)
     fun showDetailsPage(chosen : String)
 
+    @StateStrategyType(OneExecutionStateStrategy::class)
+    fun setSearchResults(results : List<String>)
+
 }

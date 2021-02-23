@@ -13,10 +13,11 @@
                 motion:framePosition="30"
                 motion:keyPositionType="parentRelative"
                 motion:motionTarget="@+id/weather_icon"
-                motion:percentX="0.7"
-                motion:percentY="0.14" />
+                motion:percentX="0.731"
+                motion:percentY="0.182" />
 
         </KeyFrameSet>
+
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
@@ -51,7 +52,6 @@
             android:id="@+id/current_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +103,7 @@
 
             <CustomAttribute
                 motion:attributeName="textSize"
-                motion:customFloatValue="12" />
+                motion:customFloatValue="16" />
 
         </Constraint>
 

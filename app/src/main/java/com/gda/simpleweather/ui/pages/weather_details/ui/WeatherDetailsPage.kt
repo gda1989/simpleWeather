@@ -45,19 +45,30 @@ class WeatherDetailsPage : BaseMvpFragment(), WeatherDetailsView, IWeatherDetail
             }
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this) {
-            view.let {
-                Navigation.findNavController(it).navigate(R.id.citiesListPage)
-            }
-        }
-
         forecastSheet = ForecastBottomPage()
         forecastSheet?.show(childFragmentManager, "forecast")
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            onBackPressed()
+        }
+    }
+
+    override fun onBackPressed() {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_weatherDetailsPage_to_citiesListPage)
+        }
     }
 
     override fun setWeather(info: WeatherViewItem) {
         binding.cityName.text = info.cityName
-        binding.currentTemp.text = info.main?.temp.toString()
+        binding.currentTemp.text = info.main?.temp?.let {
+            "${if (it > 273) "+" else ""}${(it - 273).toInt()} ${
+                resources.getString(
+                    R.string.deg_symbol
+                )
+            }C"
+        }
         info.weather?.get(0)?.icon?.let {
             Renderer.renderIcon(
                 it

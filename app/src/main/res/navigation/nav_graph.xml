@@ -7,7 +7,15 @@
     <fragment
         android:id="@+id/citiesListPage"
         android:name="com.gda.simpleweather.ui.pages.cities.ui.CitiesListPage"
-        android:label="CitiesListPage" />
+        android:label="CitiesListPage" >
+        <action
+            android:id="@+id/action_citiesListPage_to_weatherDetailsPage"
+            app:destination="@id/weatherDetailsPage"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
     <fragment
         android:id="@+id/weatherDetailsPage"
         android:name="com.gda.simpleweather.ui.pages.weather_details.ui.WeatherDetailsPage"
@@ -15,6 +23,13 @@
         <argument
             android:name="name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_weatherDetailsPage_to_citiesListPage"
+            app:destination="@id/citiesListPage"
+            app:enterAnim="@anim/enter_from_left"
+            app:exitAnim="@anim/exit_to_right"
+            app:popEnterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_left"/>
     </fragment>
 
 </navigation>

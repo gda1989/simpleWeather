@@ -1,4 +1,4 @@
-package com.gda.simpleweather.network
+package com.gda.simpleweather.network.repos
 
 import com.gda.simpleweather.BuildConfig
 import com.gda.simpleweather.network.client.ApiClient

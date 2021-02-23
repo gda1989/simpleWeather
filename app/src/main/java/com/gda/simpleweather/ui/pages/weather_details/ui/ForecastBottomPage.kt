@@ -1,11 +1,10 @@
 package com.gda.simpleweather.ui.pages.weather_details.ui
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,6 +69,20 @@ class ForecastBottomPage : BaseBottomSheetDialogFragment() {
         }
     }
 
+
+    // чтобы при нажатии назад сразу уходить на список городов
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return super.onCreateDialog(savedInstanceState).apply {
+            setOnKeyListener { _, keyCode: Int, keyEvent: KeyEvent ->
+                if (keyCode == KeyEvent.KEYCODE_BACK && keyEvent.action == KeyEvent.ACTION_UP) {
+                    (requireParentFragment() as IWeatherDetails).onBackPressed()
+                    return@setOnKeyListener true
+                }
+                return@setOnKeyListener false
+            }
+        }
+    }
+
     fun setForecast(list: List<ForecastItem?>) {
         if (adapter == null || binding.forecastList.adapter == null) {
             adapter = ForecastAdapter()
@@ -97,5 +110,4 @@ class ForecastBottomPage : BaseBottomSheetDialogFragment() {
             }
         }
     }
-
 }

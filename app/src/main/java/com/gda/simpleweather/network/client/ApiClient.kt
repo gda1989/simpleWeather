@@ -10,6 +10,9 @@ class ApiClient {
             WeatherEndpoints::class.java, BuildConfig.baseWeatherAddress
         )
 
+        fun getDDATAInstance() = ServiceGenerator.createAuthorizedService(
+            DADATAEndoitns::class.java, BuildConfig.baseDADATAAddress
+        )
     }
 
 }

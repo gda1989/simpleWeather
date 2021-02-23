@@ -4,7 +4,7 @@ import com.gda.simpleweather.db.DbRepo
 import com.gda.simpleweather.interactors.items.ForecastItem
 import com.gda.simpleweather.interactors.items.WeatherViewItem
 import com.gda.simpleweather.network.NetworkConverters
-import com.gda.simpleweather.network.WeatherRepo
+import com.gda.simpleweather.network.repos.WeatherRepo
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -32,7 +32,7 @@ class WeatherInteractor(
                     )
                 })
         )
-            .filter {
+            .filter {           //отфильтровываем заглушку-пустой лист от дбРипы
                 it.isNotEmpty() }
             .first(
                 listOf()))

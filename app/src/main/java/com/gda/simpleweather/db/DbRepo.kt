@@ -24,7 +24,7 @@ class DbRepo {
                 .findAll()
             result?.let { results ->
                 emitter.onSuccess(results.map { DbConverters.dbWeatherToViewItem(it) })
-            } ?: emitter.onSuccess(listOf())
+            } ?: emitter.onSuccess(listOf())        // тут удобнее было бы передать null, но нельзя, потому заглушка такая вот
             realm.close()
         }
             .subscribeOn(Schedulers.io())
@@ -59,6 +59,7 @@ class DbRepo {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    //todo
     fun delete(cityName: String): Completable {
         return Completable.fromAction {
             val realm = Realm.getDefaultInstance()

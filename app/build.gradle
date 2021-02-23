@@ -21,9 +21,7 @@ android {
 
         buildConfigField("String", "baseWeatherAddress", "\"http://api.openweathermap.org/\"")
 
-        buildConfigField("String", "baseIpToGeoAddress", "\"https://maps.googleapis.com/\"")
-
-        buildConfigField("String", "baseOffsetAddress", "\"http://ip-api.com/\"")
+        buildConfigField("String", "baseDADATAAddress", "\"https://suggestions.dadata.ru\"")
     }
 
     buildFeatures {
@@ -37,7 +35,7 @@ android {
         }
         buildTypes.each {
             it.buildConfigField "String", "wak", wak
-            it.buildConfigField " String", "gak", gak
+            it.buildConfigField " String", "dadaak", dadaak
         }
     }
     compileOptions {

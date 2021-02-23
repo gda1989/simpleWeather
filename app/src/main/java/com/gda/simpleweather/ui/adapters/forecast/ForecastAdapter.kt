@@ -22,7 +22,10 @@ class ForecastAdapter : RecyclerView.Adapter<ForecastViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        list?.get(position)?.let { holder.bind(it) }
+        list?.get(position)?.let {
+            holder.bind(it)
+            holder.showDivider(position > 0)
+        }
     }
 
     override fun getItemCount(): Int {
