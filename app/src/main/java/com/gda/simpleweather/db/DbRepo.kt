@@ -23,8 +23,10 @@ class DbRepo {
             val result = realm.where(WeatherDbItem::class.java)
                 .findAll()
             result?.let { results ->
-                emitter.onSuccess(results.map { DbConverters.dbWeatherToViewItem(it) })
-            } ?: emitter.onSuccess(listOf())        // тут удобнее было бы передать null, но нельзя, потому заглушка такая вот
+                emitter.onSuccess(results.map { DbConverters.dbWeatherToViewItem(it) }
+                    .sortedBy { it?.cityName })
+            }
+                ?: emitter.onSuccess(listOf())        // тут удобнее было бы передать null, но нельзя, потому заглушка такая вот
             realm.close()
         }
             .subscribeOn(Schedulers.io())
