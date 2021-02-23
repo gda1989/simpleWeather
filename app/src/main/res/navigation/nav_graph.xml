@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/citiesListPage">
+
+    <fragment
+        android:id="@+id/citiesListPage"
+        android:name="com.gda.simpleweather.ui.pages.cities.ui.CitiesListPage"
+        android:label="CitiesListPage" />
+    <fragment
+        android:id="@+id/weatherDetailsPage"
+        android:name="com.gda.simpleweather.ui.pages.weather_details.ui.WeatherDetailsPage"
+        android:label="WeatherDetailsPage">
+        <argument
+            android:name="name"
+            app:argType="string" />
+    </fragment>
+
+</navigation>

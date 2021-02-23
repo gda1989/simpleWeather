@@ -1,0 +1,33 @@
+ext {
+    retrofitVersion = '2.6.0'
+    okHttpVersion = '3.14.2'
+    daggerVersion = '2.27'
+    rxVersion = '3.0.1'
+    rxBindingVersion = '2.1.1'
+    navigationVersion = '2.3.1'
+    lifecycleVersion = '1.1.1'
+    retrofitRxAdapterVersion = '2.5.0'
+    moxyVersion = '2.2.0'
+
+    navFragment = "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
+    navUI = "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+
+    dagger = "com.google.dagger:dagger:$daggerVersion"
+    daggerKapt = "com.google.dagger:dagger-compiler:$daggerVersion"
+
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    retrofitJsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    okHttp = "com.squareup.okhttp3:okhttp:$okHttpVersion"
+    okHttpLogging = "com.squareup.okhttp3:logging-interceptor:$okHttpVersion"
+    urlConnection = "com.squareup.okhttp3:okhttp-urlconnection:$okHttpVersion"
+
+    rxKotlin = "io.reactivex.rxjava3:rxkotlin:$rxVersion"
+    rxBinding = "com.jakewharton.rxbinding2:rxbinding:$rxBindingVersion"
+
+    retrofitRxAdapter = "com.squareup.retrofit2:adapter-rxjava2:$retrofitRxAdapterVersion"
+
+    moxy =  "com.github.moxy-community:moxy:$moxyVersion"
+    moxyCompiler =  "com.github.moxy-community:moxy-compiler:$moxyVersion"
+    moxyAndroid = "com.github.moxy-community:moxy-androidx:$moxyVersion"
+}
