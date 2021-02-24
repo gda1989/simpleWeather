@@ -35,6 +35,10 @@ class CitiesListViewHolder(
 
         infoModel.weather?.get(0)?.icon?.let { binding.icon.setImageResource(Renderer.renderIcon(it)) }
 
+        binding.delete.setOnClickListener{
+            infoModel.cityName?.let {
+                it1 -> callback.deleteCity(it1) } }
+
     }
 
     fun showDivider(show: Boolean) {

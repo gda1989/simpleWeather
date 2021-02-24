@@ -110,6 +110,10 @@ class CitiesListPage : BaseMvpFragment(), CitiesListView, ICitiesList {
         presenter.getWeather(text)
     }
 
+    override fun deleteCity(name: String) {
+        presenter.deleteCity(name)
+    }
+
     private fun hideSearchElements() {
         binding.dimView.visibility = View.INVISIBLE
         binding.searchResultsCard.visibility = View.GONE

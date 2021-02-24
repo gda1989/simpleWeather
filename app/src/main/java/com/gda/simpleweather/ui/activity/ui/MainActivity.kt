@@ -3,7 +3,9 @@ package com.gda.simpleweather.ui.activity.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.gda.simpleweather.R
 import com.gda.simpleweather.databinding.ActivityMainBinding
 import com.gda.simpleweather.ui.activity.MainPresenter
@@ -18,6 +20,8 @@ class MainActivity : MvpAppCompatActivity(), IMain, MainView {
     @InjectPresenter
     lateinit var presenter: MainPresenter
 
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -28,7 +32,7 @@ class MainActivity : MvpAppCompatActivity(), IMain, MainView {
         val host =
             supportFragmentManager.findFragmentById(R.id.weather_host_fragment) as NavHostFragment
         val inflater = host.navController.navInflater
-        val navController = host.navController
+        navController = host.findNavController()
         if (defaultCity.isNullOrBlank()) {
             val graph = inflater.inflate(R.navigation.nav_graph);
             graph.startDestination = R.id.citiesListPage

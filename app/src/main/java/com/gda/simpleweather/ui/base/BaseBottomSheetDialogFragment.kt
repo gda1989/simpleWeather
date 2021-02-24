@@ -8,6 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 open class BaseBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
+
     //спасибо медиуму)
     override fun setCancelable(cancelable: Boolean) {
         val dialog: Dialog? = dialog

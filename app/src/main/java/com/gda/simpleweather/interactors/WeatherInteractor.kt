@@ -33,24 +33,31 @@ class WeatherInteractor(
                 })
         )
             .filter {           //отфильтровываем заглушку-пустой лист от дбРипы
-                it.isNotEmpty() }
+                it.isNotEmpty()
+            }
             .first(
-                listOf()))
+                listOf()
+            ))
 
     }
 
-    fun getWeather(q: String): Single<WeatherViewItem?> {
+    fun getWeather(q: String, update: Boolean): Single<WeatherViewItem>? {
+        val networkLoader = weatherRepo.getWeather(q)
+            ?.flatMap { it ->
+                dbRepo
+                    .save(it)
+                    .andThen(Single.just(it))
+            }
+            ?.map {
+                NetworkConverters.apiWeatherToViewItem(it)
+            }
+        if (update) {
+            return networkLoader
+        }
         return Single.concat(
             dbRepo.read(q),
-            weatherRepo.getWeather(q)
-                ?.flatMap { it ->
-                    dbRepo
-                        .save(it)
-                        .andThen(Single.just(it))
-                }
-                ?.map {
-                    NetworkConverters.apiWeatherToViewItem(it)
-                })
+            networkLoader
+        )
             .filter { !it.cityName.isNullOrEmpty() }
             .first(WeatherViewItem(""))
             .map {
@@ -58,6 +65,8 @@ class WeatherInteractor(
                 return@map it
             }
     }
+
+    fun getWeather(q: String) = getWeather(q, false)
 
     fun getForecast(q: String): Single<List<ForecastItem?>?>? {
         return weatherRepo.getForecast(q)?.map { it ->
@@ -79,4 +88,6 @@ class WeatherInteractor(
             .observeOn(AndroidSchedulers.mainThread())
     }
 
+    fun delete(cityName: String) =
+        dbRepo.delete(cityName)
 }

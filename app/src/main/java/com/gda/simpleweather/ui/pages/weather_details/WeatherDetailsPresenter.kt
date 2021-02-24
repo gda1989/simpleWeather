@@ -21,8 +21,8 @@ class WeatherDetailsPresenter : MvpPresenter<WeatherDetailsView>() {
 
     fun getWeather(name: String) {
         getForecast(name)
-        weatherInteractor.getWeather(name)
-            .subscribe({
+        weatherInteractor.getWeather(name, true)
+            ?.subscribe({
                 it?.let { viewState.setWeather(it) } ?: viewState.setNoData()
             }, {
                 viewState.onError(it.message)

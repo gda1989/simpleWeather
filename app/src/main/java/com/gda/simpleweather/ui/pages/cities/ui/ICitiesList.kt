@@ -6,4 +6,6 @@ interface ICitiesList {
 
     fun onSearchItemClick(text : String)
 
+    fun deleteCity(name : String)
+
 }

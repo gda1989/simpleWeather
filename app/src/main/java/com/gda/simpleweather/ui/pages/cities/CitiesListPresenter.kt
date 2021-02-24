@@ -90,4 +90,13 @@ class CitiesListPresenter : MvpPresenter<CitiesListView>() {
             })
     }
 
+    fun deleteCity(name: String) {
+        weatherInteractor.delete(name)
+            .subscribeOn(Schedulers.io())
+            .doOnComplete { getList() }
+            .subscribe({}, {
+                viewState.onError(it.message)
+            })
+    }
+
 }
